@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Update Institution{% endblock title %}
+{% block title %}Update Student{% endblock title %}
 {% block content %}
 <div class="row">
   <div class="col-md-10 mx-auto">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title"><strong>Update Institution</strong></h3>
+        <h3 class="card-title"><strong>Update Student</strong></h3>
       </div>
       <div class="card-body">
         <div class="row">
@@ -15,8 +15,9 @@
                 {% csrf_token %}
                 <div class="row p-2">
                   <div class="col-md-6">
+                    <label for="">Registration Number</label>
                     <div class="form-group">
-                      {{ form.name }}
+                      {{ form.reg_num }}
                       {% if messages %}
                         {% for message in messages %}
                           <div class="alert alert-danger">{{ message }}</div>
@@ -25,33 +26,57 @@
                     </div>
                   </div>
                   <div class="col-md-6">
+                    <label for="">Email Address</label>
                     <div class="form-group">
-                      {{ form.address }}
+                      {{ form.email }}
                     </div>
                   </div>
                   <div class="col-md-6">
+                    <label for="">First Name</label>
                     <div class="form-group">
-                      {{ form.website }}
+                      {{ form.first_name }}
                     </div>
                   </div>
                   <div class="col-md-6">
+                    <label for="">Last Name</label>
                     <div class="form-group">
-                      {{ form.location }}
+                      {{ form.last_name }}
                     </div>
                   </div>
                   <div class="col-md-6">
+                    <label for="">Institution</label>
                     <div class="form-group">
-                      {{ form.year_founded }}
+                      {{ form.institution }}
                     </div>
                   </div>
                   <div class="col-md-6">
+                    <label for="">Course</label>
                     <div class="form-group">
-                      {{ form.institution_type }}
+                      {{ form.course }}
                     </div>
                   </div>
-                  <div class="col-md-12">
+                  <div class="col-md-6">
+                    <label for="">Gender</label>
                     <div class="form-group">
-                      {{ form.vision }}
+                      {{ form.gender }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Guardian</label>
+                    <div class="form-group">
+                      {{ form.guardian }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Date of Birth</label>
+                    <div class="form-group">
+                      {{ form.date_of_birth }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="">Status</label>
+                    <div class="form-group">
+                      {{ form.status }}
                     </div>
                   </div>
                   <div class="col-md-12">

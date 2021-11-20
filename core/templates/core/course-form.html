@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Update Institution{% endblock title %}
+{% block title %}Add Course{% endblock title %}
 {% block content %}
 <div class="row">
   <div class="col-md-10 mx-auto">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title"><strong>Update Institution</strong></h3>
+        <h3 class="card-title"><strong>Add Course</strong></h3>
       </div>
       <div class="card-body">
         <div class="row">
@@ -16,6 +16,7 @@
                 <div class="row p-2">
                   <div class="col-md-6">
                     <div class="form-group">
+                    <label for="">Name</label>
                       {{ form.name }}
                       {% if messages %}
                         {% for message in messages %}
@@ -26,37 +27,13 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      {{ form.address }}
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      {{ form.website }}
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      {{ form.location }}
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      {{ form.year_founded }}
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      {{ form.institution_type }}
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      {{ form.vision }}
+                    <label for="">Institution</label>
+                      {{ form.institution }}
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="modal-footer justify-content-between">
-                      <a href="{% url 'institutions' %}" type="button" class="btn btn-danger">Back</a>
+                      <a href="{% url 'courses' %}" type="button" class="btn btn-danger">Back</a>
                       <input type="submit" class="btn btn-primary" value="Save">
                     </div>
                   </div>

@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 {% block title %}Course List{% endblock title %}
 {% block content %}
+<!-- Display Success Message on form submition -->
+  {% if messages %}
+    {% for message in messages %}
+      <div id="successMessage" class="alert alert-success">
+        <strong>{{ message }}</strong>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <script>
+    setTimeout(
+      function() {
+        $("#successMessage").delay(4000).fadeOut('fast');
+      }, 1000
+    );
+  </script>
+<!-- End of success message -->
 <div class="row">
   <div class="col-md-12">
     <div class="card card-primary">
@@ -17,10 +33,10 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-institution">
+                <a href="{% url 'add-course' %}" type="button" class="btn btn-primary">
                   <i class="fa fa-plus"></i>
                   Add
-                </button>
+                </a>
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search"/>
@@ -37,14 +53,20 @@
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Number of students</th>
+                      <th>University</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {% for course in courses %}
                     <tr>
                       <td>{{ course.name }}</td>
-                      <td></td>
+                      <td>{{ course.institution }}</td>
+                      <td>
+                        <a href="{% url 'edit-course' course.id %}" type="button" class="btn btn-sm btn-primary">Update</a>
+                          &nbsp;
+                        <a href="{% url 'delete-course' course.id %}" class="btn btn-sm btn-danger">Delete</a>
+                      </td>
                     </tr>
                     {% endfor %}
                   </tbody>
@@ -55,16 +77,16 @@
           <!-- Pagination -->
           <div class="pagination mx-auto">
             <span class="step-links">
-              {% if page_obj.has_previous %}
+              {% if courses.has_previous %}
                 <a href="?page=1">&laquo; First</a>
-                <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                <a href="?page={{ courses.previous_page_number }}">Previous</a>
               {% endif %}
               <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                Page {{ courses.number }} of {{ courses.paginator.num_pages }}
               </span>
-              {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+              {% if courses.has_next %}
+                <a href="?page={{ courses.next_page_number }}">Next</a>
+                <a href="?page={{ courses.paginator.num_pages }}">Last &raquo;</a>
               {% endif %}
             </span>
           </div>
