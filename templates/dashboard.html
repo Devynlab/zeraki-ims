@@ -2,7 +2,7 @@
 {% block title %}Dashboard{% endblock title %}
 {% block content %}
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="info-box">
         <span class="info-box-icon bg-blue"><i class="fas fa-university"></i></span>
         <div class="info-box-content">
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="info-box">
         <span class="info-box-icon bg-green"><i class="fas fa-user-graduate"></i></span>
         <div class="info-box-content">
@@ -20,21 +20,12 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="info-box">
         <span class="info-box-icon bg-yellow"><i class="fas fa-book-reader"></i></span>
         <div class="info-box-content">
           <span class="info-box-text">Courses</span>
           <span class="info-box-number">{{ courses.count }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="info-box">
-        <span class="info-box-icon bg-red"><i class="fas fa-chalkboard"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">Units</span>
-          <span class="info-box-number">{{ units.count }}</span>
         </div>
       </div>
     </div>

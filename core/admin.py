@@ -12,8 +12,4 @@ class StudentAdmin(admin.ModelAdmin):
 
 @admin.register(models.Course)
 class CourseAdmin(admin.ModelAdmin):
-  pass
-
-@admin.register(models.Unit)
-class UnitAdmin(admin.ModelAdmin):
-  list_display = ['unit_id', 'name']
+  list_display = ['name', 'institution']

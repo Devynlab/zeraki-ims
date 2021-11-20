@@ -8,7 +8,10 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '0af2-105-163-2-131.ngrok.io'
+]
 
 DJANGO_APPS = [
     'django.contrib.admin',
@@ -20,6 +23,9 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    'bootstrap_modal_forms',
+    'crispy_forms',
+    'django_filters',
     'rest_framework'
 ]
 
@@ -113,3 +119,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK  = 'bootstrap4'

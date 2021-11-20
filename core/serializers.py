@@ -16,8 +16,3 @@ class CourseSerializer(serializers.ModelSerializer):
   class Meta:
     model = models.Course
     fields = '__all__'
-
-class UnitSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = models.Unit
-    fields = '__all__'

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Institution(models.Model):
   INSTITUTION_TYPE_CHOICES = [
@@ -17,6 +18,9 @@ class Institution(models.Model):
   def __str__(self) -> str:
     return self.name
 
+  def get_absolute_url(self):
+    return reverse("institution-detail", kwargs={"pk": self.pk})
+
 class Student(models.Model):
   GENDER_CHOICES = [
     ('male', 'Male'),
@@ -27,27 +31,23 @@ class Student(models.Model):
   last_name = models.CharField(max_length=50)
   email = models.EmailField()
   institution = models.ForeignKey(Institution, on_delete=models.SET_NULL, blank=True, null=True)
-  course = models.ForeignKey('Course', on_delete=models.SET_NULL, blank=True, null=True)
+  course = models.ForeignKey('Course', on_delete=models.PROTECT)
   gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
   guardian = models.CharField(max_length=50)
   date_of_birth = models.DateField()
-  passport = models.ImageField(upload_to='media/passports')
   status = models.BooleanField(default=True)
 
   def __str__(self) -> str:
     return f"{self.first_name} {self.last_name}"
 
+  def get_absolute_url(self):
+    return reverse('student-detail', kwargs={'pk': self.pk})
 class Course(models.Model):
   name = models.CharField(max_length=50, unique=True)
-  institution = models.ManyToManyField(Institution)
-  units = models.ManyToManyField('Unit')
+  institution = models.ForeignKey(Institution, on_delete=models.PROTECT)
 
   def __str__(self) -> str:
     return self.name
 
-class Unit(models.Model):
-  unit_id = models.CharField(max_length=8, unique=True)
-  name = models.CharField(max_length=50)
-
-  def __str__(self) -> str:
-    return f"{self.unit_id} - {self.name}"
+  def get_absolute_url(self):
+    return reverse('course-detail', kwargs={'pk': self.pk})
