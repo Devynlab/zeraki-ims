@@ -17,11 +17,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       {{ form.name }}
-                      {% if messages %}
-                        {% for message in messages %}
-                          <div class="alert alert-danger">{{ message }}</div>
-                        {% endfor %}
-                      {% endif %}
+                      {{ form.name.errors }}
                     </div>
                   </div>
                   <div class="col-md-6">

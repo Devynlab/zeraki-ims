@@ -10,7 +10,7 @@ DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    '13b9-105-163-1-248.ngrok.io'
+    'df63-105-163-1-248.ngrok.io'
 ]
 
 DJANGO_APPS = [

@@ -18,11 +18,7 @@
                     <div class="form-group">
                     <label for="">Name</label>
                       {{ form.name }}
-                      {% if messages %}
-                        {% for message in messages %}
-                          <div class="alert alert-danger">{{ message }}</div>
-                        {% endfor %}
-                      {% endif %}
+                      {{ form.name.errors }}
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -33,7 +29,7 @@
                   </div>
                   <div class="col-md-12">
                     <div class="modal-footer justify-content-between">
-                      <a href="{% url 'institutions' %}" type="button" class="btn btn-danger">Back</a>
+                      <a href="{% url 'courses' %}" type="button" class="btn btn-danger">Back</a>
                       <input type="submit" class="btn btn-primary" value="Save">
                     </div>
                   </div>

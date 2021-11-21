@@ -1,8 +1,7 @@
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.paginator import Paginator
 from django.db.models import ProtectedError
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from rest_framework import viewsets
@@ -35,47 +34,20 @@ class DashboardView(generic.TemplateView):
     context['courses'] = courses
     return context
 
-def institution_list(request):
-  institutions_list = models.Institution.objects.order_by('-id')
-  name_contains_query = request.GET.get('name_contains')
-  if name_contains_query != '' and name_contains_query is not None:
-    institutions = institutions_list.filter(name__icontains=name_contains_query)
-  paginator = Paginator(institutions_list, 7)
-  page = request.GET.get('page')
-  institutions = paginator.get_page(page)
-  context = {
-    'institutions_list': institutions_list,
-    'institutions': institutions
-  }
-  return render(request, 'institutions.html', context)
+class InstitutionListView(generic.ListView):
+  model = models.Institution
+  context_object_name = 'institutions'
+  template_name = 'institutions.html'
 
-def student_list(request):
-  students_list = models.Student.objects.order_by('-id')
-  paginator = Paginator(students_list, 10)
-  page = request.GET.get('page')
-  students = paginator.get_page(page)
-  name_contains_query = request.GET.get('first_name_contains')
-  if name_contains_query != '' and name_contains_query is not None:
-    students = students.filter(name__icontains=name_contains_query)
-  context = {
-    'students_list': students_list,
-    'students': students
-  }
-  return render(request, 'students.html', context)
+class StudentListView(generic.ListView):
+  model = models.Student
+  context_object_name = 'students'
+  template_name = 'students.html'
 
-def course_list(request):
-  courses_list = models.Course.objects.order_by('-id')
-  paginator = Paginator(courses_list, 7)
-  page = request.GET.get('page')
-  courses = paginator.get_page(page)
-  name_contains_query = request.GET.get('name_contains')
-  if name_contains_query != '' and name_contains_query is not None:
-    courses = courses.filter(name__icontains=name_contains_query)
-  context = {
-    'courses_list': courses_list,
-    'courses': courses
-  }
-  return render(request, 'courses.html', context)
+class CourseListView(generic.ListView):
+  model = models.Course
+  context_object_name = 'courses'
+  template_name = 'courses.html'
 
 class InstitutionCreateView(SuccessMessageMixin, generic.CreateView):
   model = models.Institution
@@ -126,12 +98,12 @@ class InstitutionDeleteView(SuccessMessageMixin, generic.DeleteView):
   success_message = "Institution deleted successfully."
 
   def delete(self, request, *args, **kwargs):
-    if ProtectedError:
+    try:
+      messages.success(self.request, self.success_message)
+      return super(InstitutionDeleteView, self).delete(request, *args, **kwargs)
+    except ProtectedError:
       messages.error(self.request, "Can't delete institution as it has been assigned a course.")
       return redirect('institutions')
-    messages.success(self.request, self.success_message)
-    return super(InstitutionDeleteView, self).delete(request, *args, **kwargs)
-
 class StudentDeleteView(generic.DeleteView):
   model = models.Student
   template_name = 'core/student_confirm_delete.html'
@@ -145,9 +117,9 @@ class CourseDeleteView(generic.DeleteView):
   success_message = "Course deleted successfully."
 
   def delete(self, request, *args, **kwargs):
-    if ProtectedError:
+    try:
+      messages.success(self.request, self.success_message)
+      return super(CourseDeleteView, self).delete(request, *args, **kwargs)
+    except:
       messages.error(self.request, "Can't delete course as it has been assigned a student.")
       return redirect('courses')
-    messages.success(self.request, self.success_message)
-    return super(CourseDeleteView, self).delete(request, *args, **kwargs)
-

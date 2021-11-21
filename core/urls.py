@@ -4,9 +4,9 @@ from core import views
 
 urlpatterns = [
   path('', views.DashboardView.as_view(), name="dashboard"),
-  path('institutions/', views.institution_list, name="institutions"),
-  path('students/', views.student_list, name="students"),
-  path('courses/', views.course_list, name="courses"),
+  path('institutions/', views.InstitutionListView.as_view(), name="institutions"),
+  path('students/', views.StudentListView.as_view(), name="students"),
+  path('courses/', views.CourseListView.as_view(), name="courses"),
   path('institution/add/', views.InstitutionCreateView.as_view(), name="add-institution"),
   path('student/add/', views.StudentCreateView.as_view(), name="add-student"),
   path('course/add/', views.CourseCreateView.as_view(), name="add-course"),

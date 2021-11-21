@@ -18,11 +18,7 @@
                     <label for="">Registration Number</label>
                     <div class="form-group">
                       {{ form.reg_num }}
-                      {% if messages %}
-                        {% for message in messages %}
-                          <div class="alert alert-danger">{{ message }}</div>
-                        {% endfor %}
-                      {% endif %}
+                      {{ form.reg_num.errors }}
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -71,6 +67,7 @@
                     <label for="">Date of Birth</label>
                     <div class="form-group">
                       {{ form.date_of_birth }}
+                      {{ form.date_of_birth.errors }}
                     </div>
                   </div>
                   <div class="col-md-6">
